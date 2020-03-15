@@ -1,23 +1,14 @@
 {
   "development": {
-    "username": "rickmurdock",
-    "password": null,
-    "database": "gabbledb",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "sqlite",
+    "storage": "./database.sqlite3"
   },
   "test": {
-    "username": "rickmurdock",
-    "password": null,
-    "database": "gabbledb",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "sqlite",
+    "storage": ":memory"
   },
   "production": {
-    "username": "rickmurdock",
-    "password": null,
-    "database": "gabbledb",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "sqlite",
+    "storage": "./database.sqlite3"
   }
 }

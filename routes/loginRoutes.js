@@ -1,39 +1,43 @@
-
-const express  = require('express');
+const express = require("express");
 const loginRouter = express.Router();
 const models = require("../models");
 
 loginRouter.get("/", function(req, res) {
-  res.render('login');
+  res.render("login");
 });
 
-loginRouter.post("/", function(req, res) {
-  if (!req.body || !req.body.username || !req.body.password) {
-    return res.redirect("login");
-  }
+loginRouter.post("/", async function(req, res) {
+  // if (!req.body || !req.body.username || !req.body.password) {
+  //   return res.redirect("login");
+  // }
 
   var requestingUser = req.body;
   var userRecord;
 
-  models.user
-  .findOne({
-      where: {
-        username: requestingUser.username,
-        password: requestingUser.password
-      }
-    }).then(function (user) {
-      if (user) {
-        req.session.user = {
-          username: user.username, 
-          displayName: user.displayname,
-          userId: user.id
-        }
-        res.redirect("/");
-      } else {
-        console.log("USER NOT FOUND");
-        return res.redirect("login");
-      }
-    });
+  const username = req.body.username;
+  const password = req.body.password;
+  const statement =
+    "SELECT * FROM USERS where username = " +
+    `\"${username}\"` +
+    " AND password = " +
+    `\"${password}\"`;
+  const [results, metadata] = await models.sequelize.query(statement, {
+    raw: true
+  });
+  console.log(results.length);
+
+  if (results.length > 0) {
+    req.session.user = {
+      username: results[0].username,
+      displayName: results[0].displayName,
+      userId: results[0].id
+    };
+    res.redirect("/");
+  } else {
+    res.redirect("login");
+  }
 });
+
+// https://sequelize.org/master/manual/raw-queries.html
 
 module.exports = loginRouter;
