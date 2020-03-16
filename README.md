@@ -2,8 +2,11 @@
 
 The Iron Yard Weekly Project: Gabble has been hacked. As part of the art of war:- ```If you know the enemy and know yourself, you need not fear the result of a hundred battles```
 
+## Steps :- 
 
-
+1. ```git clone https://github.com/nipunbatraTw/gabble/```
+2. Run ```npm install```
+3. Run ```npx sequelize-cli db:migrate```
 
 ### Mockups you can optionally use
 
