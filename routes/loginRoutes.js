@@ -16,13 +16,17 @@ loginRouter.post("/", async function(req, res) {
 
   const username = req.body.username;
   const password = req.body.password;
-  const statement =
-    "SELECT * FROM USERS where username = " +
-    `\"${username}\"` +
-    " AND password = " +
-    `\"${password}\"`;
+  // const statement =
+  //   "SELECT * FROM USERS where username = " +
+  //   `\"${username}\"` +
+  //   " AND password = " +
+  //   `\"${password}\"`;
+
+  const statement = "SELECT * FROM USERS where username = ? AND password = ?";
+
   const [results, metadata] = await models.sequelize.query(statement, {
-    raw: true
+    raw: true,
+    replacements: [username, password]
   });
   console.log(results.length);
 

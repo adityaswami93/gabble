@@ -21,7 +21,8 @@
       <h1>Create a New Gab</h1>
       <br>
       <form action="/creategab" method="post">
-        <textarea name="newgab" id="newgab" maxlength="140" cols="50" rows="3"></textarea>
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <textarea name="newgab" id="newgab" maxlength="10000" cols="50" rows="3"></textarea>
         <br>
         <input type="submit" name="savegab" value="Save gab">
       </form>
